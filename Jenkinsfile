@@ -16,6 +16,12 @@ pipeline{
         stage('Run Test'){
             steps{
                 sh "docker-compose -f test-suites.yaml up --pull=always"
+                script{
+                  if(fileExists('output/vendor-portal/testng-failed.xml') || fileExists('output/flight-reservation/testng-failed.xml')){
+                    error("There are test failures, please check the reports")
+                  } else {
+                    echo "All tests passed successfully"
+                  }
             }
         }
 
