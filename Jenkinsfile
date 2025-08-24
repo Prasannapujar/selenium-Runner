@@ -9,7 +9,7 @@ pipeline{
 
         stage('Start Grid'){
             steps{
-                sh "docker-compose -f grid.yaml up -d --scale ${BROWSER}=2 --d"
+                sh "docker-compose -f grid.yaml up -d --scale ${params.BROWSER}=2 --d"
             }
         }
 
